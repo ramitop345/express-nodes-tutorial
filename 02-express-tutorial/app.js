@@ -6,8 +6,10 @@ const logger = require('./logger')
 // thi is a middleware
 
 
+app.use(logger)
+
 //this is another middleware
-app.get('/',logger,(req,res) => {
+app.get('/',(req,res) => {
    
     res.send('Home')
 })
@@ -17,6 +19,15 @@ app.get('/about', (req,res) => {
     res.send('About')
 })
 
+//another middleware
+app.get('/products', (req,res) => {
+    res.send('Products')
+})
+
+//another middleware
+app.get('/items', (req,res) => {
+    res.send('Items')
+})
 
 app.listen(5000,()=>{
     console.log('Server is listening on port 5000')
