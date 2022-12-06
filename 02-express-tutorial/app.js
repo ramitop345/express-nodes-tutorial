@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const logger = require('./logger')
+const authorize = require('./authorize')
 
 //req => middleware =>res
 // thi is a middleware
 
 
-app.use(logger)
+//app.use(logger)
+app.use([logger,authorize]) //use this tu use api as base(api/home/about/products)
 
 //this is another middleware
 app.get('/',(req,res) => {
@@ -20,12 +22,13 @@ app.get('/about', (req,res) => {
 })
 
 //another middleware
-app.get('/products', (req,res) => {
+app.get('/api/products', (req,res) => {
     res.send('Products')
 })
 
 //another middleware
-app.get('/items', (req,res) => {
+app.get('/api/items', (req,res) => {
+    console.log(req.user)
     res.send('Items')
 })
 
