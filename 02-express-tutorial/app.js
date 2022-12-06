@@ -1,36 +1,23 @@
 const express = require('express')
 const app = express()
-const logger = require('./logger')
-const authorize = require('./authorize')
-const morgan = require('morgan')
-
-//req => middleware =>res
-// thi is a middleware
+let {people} = require('./data')
 
 
-//app.use(logger)
-app.use(morgan('tiny')) //use this tu use api as base(api/home/about/products)
+//static assets
+app.use(express.static('./methods-public'))
+//parser from data
+app.use(express.urlencoded({extended: false}))
 
-//this is another middleware
-app.get('/',(req,res) => {
-   
-    res.send('Home')
+app.get('/api/people', (req,res) => {
+    res.status(200).json({succes:true,data:people})
 })
 
-//another middleware
-app.get('/about', (req,res) => {
-    res.send('About')
-})
-
-//another middleware
-app.get('/api/products', (req,res) => {
-    res.send('Products')
-})
-
-//another middleware
-app.get('/api/items', (req,res) => {
-    console.log(req.user)
-    res.send('Items')
+app.post('/login', (req,res) => {
+    const {name} = req.body
+    if (name){
+        return res.status(200).send(`Welcome ${name}`)
+    }
+    res.status(401).send('please provide credentials')
 })
 
 app.listen(5000,()=>{
