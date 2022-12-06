@@ -46,7 +46,24 @@ app.get('/api/products/:productID/reviews/:reviewID', (req, res) =>{
     res.send('hello world')
 })
 
+app.get('/api/v1/query', (req,res) => {
+    res.send('Hello  World')
+    const {search, limit} = req.query
+    let sortedProducts = [...products]
+
+    if (search){
+    sortedProducts = sortedProducts.filter((product) =>{
+return product.name.startsWith(search)
+    })
+
+}
+if (limit){
+return sortedProducts = sortedProducts.slice(0,Number(limit))
+}
+res.status(200).json(sortedProducts)
+//res.send('Hello World')
+})
 
 app.listen(5000,()=>{
-    console.log('Server is listenint on port 5000')
+    console.log('Server is listening on port 5000')
 })
