@@ -12,6 +12,10 @@ app.get('/api/people', (req,res) => {
     res.status(200).json({succes:true,data:people})
 })
 
+app.post('api/people',(req,res) => {
+    res.status(201).send('Success')
+})
+
 app.post('/login', (req,res) => {
     const {name} = req.body
     if (name){
