@@ -1,15 +1,15 @@
 
 
 const getAllTasks = (req,res) =>{
-    res.send('get Task')
+    res.send('get all Tasks')
 }
-
+//used res.json() to test middleware
 const getTask = (req,res) =>{
-    res.send('get A single Task')
+    res.json({id: req.params.id})
 }
 
 const createTask = (req,res) =>{
-    res.send('create Task')
+    res.json(req.body)
 }
 
 const updateTask = (req,res) =>{

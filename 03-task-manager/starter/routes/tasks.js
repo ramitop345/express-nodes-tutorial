@@ -8,6 +8,6 @@ const log = console.log
 
 Router.route('/').get(getAllTasks).post(createTask)
 
-Router.route('/:id').post(getTask).patch(updateTask).delete(deleteTask)
+Router.route('/:id').get(getTask).patch(updateTask).delete(deleteTask)
 
 module.exports = {Router,log}
